@@ -1,0 +1,3 @@
+<?php $pageTitle = 'Database setup required'; $error = 'The store could not connect to its database. Import database/nabta_store2.sql and check the DB_* values in your private .env file.'; require __DIR__ . '/layouts/auth-layout-top.php'; ?>
+<section class="auth-card"><a class="auth-back" href="index.php">← Back to Nabta</a><h2>One small setup step.</h2><p class="auth-subtitle"><?= e($error) ?></p><p class="auth-inline-note">For XAMPP, start Apache and MySQL, import the SQL file in phpMyAdmin, then update .env with your local database settings.</p></section>
+<?php require __DIR__ . '/layouts/auth-layout-bottom.php'; ?>

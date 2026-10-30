@@ -1,0 +1,3432 @@
+/* NABTA BOTANICAL — single source of truth for all brand colors. */
+:root {
+  --deep: #051f20;
+  --forest: #0b2b26;
+  --wood: #163832;
+  --leaf: #235347;
+  --sage: #8eb69b;
+  --mint: #daf1de;
+
+  --bg: var(--deep);
+  --surface: var(--forest);
+  --surface-raised: var(--wood);
+  --surface-soft: color-mix(in srgb, var(--leaf) 35%, var(--forest));
+  --line: var(--leaf);
+  --text: var(--mint);
+  --muted: var(--sage);
+  --accent: var(--sage);
+  --ink: var(--deep);
+  --head: 78px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+  --shadow-soft: 0 18px 48px color-mix(in srgb, var(--deep) 42%, transparent);
+  --shadow-hover: 0 26px 65px color-mix(in srgb, var(--deep) 58%, transparent);
+  --ease: cubic-bezier(0.2, 0.75, 0.2, 1);
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 32px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--head) + 20px);
+}
+body,
+body.botanical-edition:not(.admin-body) {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+body {
+  margin: 0;
+}
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "DM Sans", Manrope, Arial, sans-serif;
+}
+body :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--text);
+}
+body :is(p, li, small, .muted, .label) {
+  color: var(--muted);
+}
+body a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, var(--sage) 65%, transparent);
+}
+body a:hover {
+  color: var(--mint);
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+img {
+  max-width: 100%;
+}
+:focus-visible {
+  outline: 2px solid var(--sage) !important;
+  outline-offset: 4px;
+}
+::selection {
+  background: var(--sage);
+  color: var(--deep);
+}
+.skip {
+  background: var(--mint) !important;
+  color: var(--deep) !important;
+  border-radius: var(--radius-sm);
+}
+.container {
+  width: min(1400px, calc(100% - 64px));
+}
+.eyebrow,
+.hero-copy .eyebrow,
+.contact-section .eyebrow,
+.about-strip .eyebrow {
+  color: var(--sage) !important;
+  letter-spacing: 0.18em;
+}
+.link,
+.text-link,
+.plain-link {
+  color: var(--mint);
+  border-color: var(--leaf);
+}
+.link:hover,
+.text-link:hover,
+.plain-link:hover {
+  color: var(--sage);
+}
+
+/* Global surfaces, cards, controls, and page areas. */
+body.garden-home {
+  background: var(--deep) !important;
+}
+.garden-home #main,
+.garden-home #main > .container {
+  background: transparent !important;
+}
+.garden-home .screen:not(.promo-slider),
+.garden-home .section,
+.garden-home .section-base,
+.garden-home .section-top,
+.garden-home .collection,
+.garden-home .garden-paths,
+.garden-home #faq {
+  background-color: transparent !important;
+}
+.panel,
+.stat,
+.popover,
+.notice,
+.assistant-preview,
+.empty-state,
+.filter-block,
+.product-card,
+.path-card,
+.benefit,
+.faq-item,
+.bundle-card,
+.contact-form-card {
+  background: var(--surface) !important;
+  color: var(--text);
+  border-color: var(--line) !important;
+}
+.panel,
+.stat,
+.popover,
+.product-card,
+.path-card,
+.faq-item,
+.bundle-card,
+.contact-form-card {
+  box-shadow: var(--shadow-soft);
+}
+.panel:hover,
+.stat:hover,
+.product-card:hover,
+.path-card:hover,
+.bundle-card:hover {
+  border-color: var(--sage) !important;
+  box-shadow: var(--shadow-hover);
+}
+th,
+thead,
+.table-head {
+  background: var(--wood) !important;
+  color: var(--mint) !important;
+}
+td,
+th,
+table {
+  border-color: var(--line) !important;
+}
+.pill,
+.category-strip a,
+.product-tag,
+.bundle-set-badge,
+.bundle-count-pill,
+.bundle-items-list > span,
+.path-number,
+.hero-tag,
+.contact-icon {
+  background: var(--surface-soft) !important;
+  color: var(--mint) !important;
+  border-color: var(--line) !important;
+}
+.pill.pending {
+  background: var(--wood) !important;
+  color: var(--mint) !important;
+}
+.divider,
+hr {
+  border-color: var(--line) !important;
+}
+
+/* Floating transparent header: it gains a glass surface only once the page scrolls. */
+.index-page .header,
+.garden-home .header {
+  position: fixed !important;
+  inset: 0 0 auto;
+  z-index: 1000;
+  width: 100%;
+  height: var(--head);
+  background: transparent !important;
+  border-bottom: 1px solid transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease,
+    backdrop-filter 0.28s ease;
+}
+.index-page .header.is-scrolled,
+.garden-home .header.is-scrolled {
+  background: color-mix(in srgb, var(--deep) 91%, transparent) !important;
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--leaf) 75%,
+    transparent
+  ) !important;
+  backdrop-filter: blur(20px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(130%) !important;
+}
+.index-page .header-row {
+  min-height: var(--head);
+}
+.header .logo,
+.header .logo-sub,
+.header a,
+.header .main-nav a,
+.header .header-actions a,
+.header .leaf-logo {
+  color: var(--mint) !important;
+}
+.header .leaf-logo {
+  stroke: var(--sage) !important;
+}
+.logo {
+  letter-spacing: 0.13em;
+}
+.logo-sub {
+  color: var(--sage) !important;
+}
+.main-nav {
+  gap: clamp(18px, 2.5vw, 38px) !important;
+}
+.main-nav a {
+  position: relative;
+  font-size: 12px;
+  letter-spacing: 0.025em;
+  transition: color 0.2s ease;
+}
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 1px;
+  background: var(--sage);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.24s var(--ease);
+}
+.main-nav a:hover::after,
+.main-nav a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.header-actions {
+  gap: 12px !important;
+}
+.header-actions a:hover {
+  color: var(--sage) !important;
+}
+.register-link {
+  border: 1px solid var(--sage) !important;
+  border-radius: 999px;
+  padding: 9px 15px !important;
+}
+.register-link:hover {
+  background: var(--sage) !important;
+  color: var(--deep) !important;
+}
+.bag-count {
+  background: var(--sage) !important;
+  color: var(--deep) !important;
+}
+.mobile-nav {
+  position: relative;
+}
+.mobile-nav summary {
+  color: var(--mint);
+  border: 1px solid var(--leaf);
+  border-radius: 999px;
+}
+.mobile-nav nav {
+  background: color-mix(in srgb, var(--deep) 96%, transparent) !important;
+  border: 1px solid var(--leaf);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 18px;
+}
+.mobile-nav nav a {
+  color: var(--mint) !important;
+  padding: 9px 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--leaf) 55%, transparent);
+}
+.mobile-nav nav a:hover {
+  color: var(--sage) !important;
+}
+.logout-form {
+  display: inline-flex;
+  margin: 0;
+}
+.logout-form button {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  color: var(--mint);
+  background: transparent;
+  font-size: 12px;
+}
+.logout-form button:hover {
+  color: var(--sage);
+}
+
+/* Hero and editorial landing sections. */
+.garden-home .promo-slider {
+  margin-top: 0;
+  background: var(--deep) !important;
+}
+.garden-home .promo-slider,
+.garden-home .promo-slide.hero {
+  border-color: var(--line) !important;
+}
+.garden-home .hero-copy {
+  padding-top: calc(var(--head) + clamp(22px, 4vh, 56px));
+}
+.garden-home .hero h1,
+.garden-home .hero-heading {
+  color: var(--mint) !important;
+}
+.garden-home .hero h1 em,
+.garden-home .hero-heading em {
+  color: var(--sage) !important;
+}
+.garden-home .hero p,
+.garden-home .hero-caption p {
+  color: var(--muted) !important;
+}
+.garden-home .hero-media,
+.garden-home .hero-tag,
+.garden-home .hero-caption,
+.garden-home .slider-controls,
+.garden-home .promo-slider::before {
+  border-color: var(--line) !important;
+}
+.garden-home .hero-media::after {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--deep) 72%, transparent)
+  ) !important;
+}
+.garden-home .slider-controls label {
+  background: var(--leaf) !important;
+  border-color: var(--sage) !important;
+}
+.garden-home .slider-controls label:hover {
+  background: var(--sage) !important;
+}
+.garden-home .slider-controls label[for="promo-0"],
+.garden-home .slider-controls label[for="promo-1"],
+.garden-home .slider-controls label[for="promo-2"] {
+  color: var(--mint) !important;
+}
+.section-top h2,
+.paths-title,
+.bundles-title,
+.faq-grid h2 {
+  color: var(--mint) !important;
+}
+.section-top p,
+.section-intro-v3,
+.bundle-description {
+  color: var(--muted) !important;
+}
+.garden-paths {
+  padding-block: clamp(52px, 8vw, 110px) !important;
+}
+.path-card {
+  min-height: 290px;
+  overflow: hidden;
+  border-radius: var(--radius-md) !important;
+}
+.path-card::after {
+  background: linear-gradient(
+    180deg,
+    transparent 20%,
+    color-mix(in srgb, var(--deep) 88%, transparent)
+  ) !important;
+}
+.path-card h3,
+.path-card:hover h3 {
+  color: var(--mint) !important;
+}
+.path-card p {
+  color: var(--muted) !important;
+}
+.path-arrow {
+  color: var(--sage) !important;
+  border-color: var(--leaf) !important;
+}
+.collection {
+  padding-block: clamp(54px, 8vw, 112px) !important;
+}
+.product-card {
+  overflow: hidden;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius-md) !important;
+}
+.product-visual {
+  background: var(--wood) !important;
+}
+.product-visual img {
+  transition:
+    transform 0.7s var(--ease),
+    filter 0.4s ease;
+}
+.product-card:hover .product-visual img {
+  transform: scale(1.035);
+}
+.product-info {
+  background: var(--surface) !important;
+}
+.product-info h3,
+.product-info .price,
+.product-specs strong {
+  color: var(--mint) !important;
+}
+.product-info p,
+.product-specs span {
+  color: var(--muted) !important;
+}
+.product-browse {
+  background: var(--sage) !important;
+  color: var(--deep) !important;
+  border-color: var(--sage) !important;
+}
+.product-browse:hover {
+  background: var(--mint) !important;
+  color: var(--deep) !important;
+}
+.section-base,
+.editorial-content {
+  background: var(--surface) !important;
+  color: var(--mint) !important;
+}
+.editorial {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+}
+.editorial-content h2,
+.editorial-content h3 {
+  color: var(--mint) !important;
+}
+.editorial-content p {
+  color: var(--muted) !important;
+}
+.editorial-number {
+  color: var(--sage) !important;
+  border-color: var(--line) !important;
+}
+.benefits {
+  border-top-color: var(--line) !important;
+  border-bottom-color: var(--line) !important;
+}
+.benefit {
+  border-right-color: var(--line) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.benefit h3 {
+  color: var(--mint) !important;
+}
+.benefit p {
+  color: var(--muted) !important;
+}
+
+/* Bundles: the legacy styles used cream cards; intentionally replace every surface here. */
+.bundles-section {
+  background: linear-gradient(180deg, var(--deep), var(--forest)) !important;
+  border-color: var(--line) !important;
+}
+.bundles-section::before {
+  border-color: color-mix(in srgb, var(--sage) 22%, transparent) !important;
+}
+.bundle-grid {
+  gap: clamp(16px, 2vw, 24px) !important;
+}
+.bundle-card {
+  background: var(--surface) !important;
+  color: var(--mint) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+.bundle-card:hover {
+  border-color: var(--sage) !important;
+  box-shadow: var(--shadow-hover) !important;
+}
+.bundle-photo {
+  background: var(--wood) !important;
+}
+.bundle-photo::after {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--deep) 67%, transparent)
+  ) !important;
+}
+.bundle-set-badge,
+.bundle-saving-badge,
+.bundle-count-pill,
+.bundle-kicker-mark {
+  background: var(--wood) !important;
+  color: var(--mint) !important;
+  border-color: var(--leaf) !important;
+}
+.bundle-card-kicker,
+.bundle-description,
+.bundle-items-heading,
+.bundle-price-label,
+.bundle-compare-price span,
+.bundle-compare-price del,
+.bundle-more-items {
+  color: var(--muted) !important;
+}
+.bundle-card h3,
+.bundle-price-row > div:first-child strong {
+  color: var(--mint) !important;
+}
+.bundle-items-list > span {
+  background: var(--surface-soft) !important;
+  color: var(--mint) !important;
+  border-color: var(--line) !important;
+}
+.bundle-items-list > span i {
+  color: var(--sage) !important;
+}
+.bundle-price-row {
+  border-top-color: var(--line) !important;
+}
+.bundle-add-button,
+.bundle-add-arrow {
+  background: var(--sage) !important;
+  color: var(--deep) !important;
+  border-color: var(--sage) !important;
+}
+.bundle-add-button:hover,
+.bundle-add-arrow:hover {
+  background: var(--mint) !important;
+}
+
+/* Contact us, about and FAQ. */
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 76px);
+  margin: 50px 0 !important;
+  padding: clamp(28px, 5.5vw, 76px) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius-lg) !important;
+  background: linear-gradient(135deg, var(--forest), var(--deep)) !important;
+  box-shadow: var(--shadow-soft);
+}
+.contact-section::before {
+  border-color: color-mix(in srgb, var(--sage) 28%, transparent) !important;
+}
+.contact-intro h2,
+.about-strip h2 {
+  color: var(--mint) !important;
+  font-size: clamp(40px, 5.2vw, 72px);
+}
+.contact-intro h2 em,
+.about-strip h2 em {
+  color: var(--sage) !important;
+}
+.contact-intro > p {
+  max-width: 460px;
+  color: var(--muted) !important;
+  line-height: 1.9;
+}
+.contact-details > a,
+.contact-details > div {
+  gap: 14px;
+}
+.contact-icon {
+  background: var(--surface-soft) !important;
+  color: var(--sage) !important;
+}
+.contact-details small {
+  color: var(--sage) !important;
+}
+.contact-details strong {
+  color: var(--mint) !important;
+}
+.contact-form-card {
+  background: color-mix(in srgb, var(--deep) 45%, var(--forest)) !important;
+  border-color: var(--line) !important;
+  border-radius: var(--radius-md) !important;
+  padding: clamp(22px, 3vw, 38px) !important;
+}
+.contact-form-heading {
+  margin-bottom: 25px;
+}
+.contact-form-heading .eyebrow {
+  color: var(--sage) !important;
+}
+.contact-sprout {
+  color: var(--sage) !important;
+}
+.contact-form,
+.contact-form label {
+  display: grid;
+  gap: 9px;
+}
+.contact-form {
+  gap: 19px;
+}
+.contact-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+.contact-form label {
+  color: var(--mint) !important;
+  font-size: 12px;
+  font-weight: 650;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea,
+.auth-form input,
+.field input,
+.field select,
+.field textarea,
+input.control,
+select.control,
+.toolbar input,
+.toolbar select {
+  width: 100%;
+  min-width: 0;
+  color: var(--mint) !important;
+  background: transparent !important;
+  border: 1px solid var(--leaf) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 14px 15px;
+  outline: none;
+  box-shadow: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+.contact-form :is(input, select, textarea):hover,
+.auth-form input:hover,
+.field :is(input, select, textarea):hover,
+input.control:hover,
+select.control:hover {
+  border-color: var(--sage) !important;
+  background: color-mix(in srgb, var(--leaf) 24%, transparent) !important;
+}
+.contact-form :is(input, select, textarea):focus,
+.auth-form input:focus,
+.field :is(input, select, textarea):focus,
+input.control:focus,
+select.control:focus {
+  border-color: var(--sage) !important;
+  background: color-mix(in srgb, var(--leaf) 18%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sage) 22%, transparent) !important;
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted) !important;
+  opacity: 0.8;
+}
+select option {
+  color: var(--mint);
+  background: var(--forest);
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 135px;
+}
+.contact-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 999px !important;
+  padding: 15px 18px !important;
+}
+.contact-privacy {
+  color: var(--muted) !important;
+  font-size: 10px !important;
+  line-height: 1.7;
+}
+.about-strip {
+  margin: clamp(40px, 6vw, 76px) 0 !important;
+  padding: clamp(32px, 6vw, 84px) !important;
+  text-align: center;
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius-lg) !important;
+}
+.about-strip p {
+  max-width: 620px;
+  margin: 0 auto 24px;
+  color: var(--muted) !important;
+  line-height: 1.9;
+}
+#faq {
+  padding-block: clamp(50px, 7vw, 100px) !important;
+}
+.faq-grid {
+  gap: clamp(24px, 5vw, 70px);
+}
+.faq-item {
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: none !important;
+  padding: 3px 18px;
+}
+.faq-item summary {
+  color: var(--mint) !important;
+  padding-block: 17px;
+}
+.faq-item summary::after {
+  color: var(--sage) !important;
+}
+.faq-item p {
+  color: var(--muted) !important;
+}
+
+/* Footer and interactive controls. */
+.footer {
+  background: var(--forest) !important;
+  color: var(--mint) !important;
+  border-top: 1px solid var(--line) !important;
+}
+.footer p {
+  color: var(--muted) !important;
+}
+.footer-title,
+.footer-bottom {
+  color: var(--sage) !important;
+}
+.footer-links a {
+  color: var(--mint) !important;
+}
+.footer-links a:hover {
+  color: var(--sage) !important;
+}
+.footer-bottom {
+  border-top: 1px solid var(--line) !important;
+}
+.btn,
+.btn-primary,
+button.btn,
+.bundle-add-button {
+  background: var(--sage) !important;
+  color: var(--deep) !important;
+  border-color: var(--sage) !important;
+  border-radius: 999px !important;
+  transition:
+    transform 0.2s var(--ease),
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.btn:hover,
+.btn-primary:hover,
+button.btn:hover,
+.bundle-add-button:hover {
+  background: var(--mint) !important;
+  color: var(--deep) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--deep) 28%, transparent);
+}
+.btn.secondary,
+.icon-btn {
+  background: transparent !important;
+  color: var(--mint) !important;
+  border-color: var(--leaf) !important;
+}
+.btn.secondary:hover,
+.icon-btn:hover {
+  background: var(--surface-soft) !important;
+  color: var(--mint) !important;
+}
+
+/* Account pages — an editorial split layout with a broad, horizontal registration form. */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+  background: var(--deep) !important;
+  color: var(--mint) !important;
+}
+.auth-visual {
+  min-height: 100vh;
+  padding: clamp(28px, 4.5vw, 68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(150deg, var(--forest), var(--deep)) !important;
+  border-right: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.auth-visual::before {
+  content: "";
+  position: absolute;
+  width: min(50vw, 600px);
+  aspect-ratio: 1;
+  right: -26%;
+  bottom: -17%;
+  border: 1px solid var(--leaf);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 34px color-mix(in srgb, var(--leaf) 14%, transparent),
+    0 0 0 35px var(--leaf),
+    0 0 0 82px color-mix(in srgb, var(--leaf) 9%, transparent),
+    0 0 0 83px var(--leaf);
+  pointer-events: none;
+}
+.auth-visual::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: 13%;
+  bottom: 10%;
+  border-radius: 62% 38% 57% 43%;
+  border: 1px solid color-mix(in srgb, var(--sage) 48%, transparent);
+  transform: rotate(-28deg);
+  pointer-events: none;
+}
+.auth-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  position: relative;
+  z-index: 1;
+  color: var(--mint) !important;
+}
+.auth-brand svg {
+  width: 34px;
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 2;
+}
+.auth-visual-copy {
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+  margin: auto 0;
+  padding: 50px 0;
+}
+.auth-visual-copy .eyebrow {
+  color: var(--sage) !important;
+  font-size: 10px;
+}
+.auth-visual-copy h1 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(48px, 5.5vw, 82px);
+  line-height: 0.99;
+  letter-spacing: -0.04em;
+  margin: 20px 0;
+  color: var(--mint) !important;
+}
+.auth-visual-copy h1 em {
+  color: var(--sage) !important;
+}
+.auth-visual-copy p,
+.auth-visual-foot {
+  color: var(--muted) !important;
+  line-height: 1.9;
+}
+.auth-visual-copy p {
+  max-width: 400px;
+}
+.auth-visual-foot {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+}
+.auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(28px, 4vw, 62px);
+}
+.auth-card {
+  width: min(100%, 480px);
+  min-width: 0;
+  margin-inline: auto;
+}
+.auth-card h2 {
+  color: var(--mint) !important;
+  font-size: clamp(34px, 3.6vw, 48px);
+  line-height: 1.08;
+  margin: 0 0 10px;
+  letter-spacing: -0.04em;
+}
+.auth-back {
+  color: var(--muted) !important;
+  font-size: 12px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: clamp(22px, 3vw, 36px);
+}
+.auth-back:hover {
+  color: var(--sage) !important;
+}
+.auth-subtitle {
+  color: var(--muted) !important;
+  margin: 0 0 27px;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.auth-form {
+  display: grid;
+  gap: 17px;
+}
+.auth-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--mint) !important;
+  font-size: 12px;
+  font-weight: 650;
+  min-width: 0;
+}
+.auth-form label > span {
+  color: var(--muted);
+  font-weight: 400;
+}
+.auth-form input {
+  padding: 15px 16px;
+  min-height: 50px;
+}
+.auth-input-wrap {
+  position: relative;
+  min-width: 0;
+}
+.auth-input-wrap input {
+  padding-right: 72px !important;
+}
+.password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 8px;
+  background: transparent;
+  color: var(--sage);
+  border: 0;
+  border-radius: 8px;
+  font-size: 11px;
+}
+.password-toggle:hover {
+  background: color-mix(in srgb, var(--leaf) 45%, transparent);
+  color: var(--mint);
+}
+.auth-submit {
+  margin-top: 5px;
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid var(--sage) !important;
+  padding: 15px 18px !important;
+  font-weight: 750;
+}
+.auth-switch {
+  margin-top: 24px;
+  color: var(--muted) !important;
+  font-size: 12px;
+  text-align: center;
+}
+.auth-switch a {
+  color: var(--mint) !important;
+  text-decoration: underline;
+  text-decoration-color: var(--sage);
+  text-underline-offset: 4px;
+}
+.auth-message {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 13px 15px;
+  border: 1px solid var(--leaf);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--mint) !important;
+  font-size: 12px;
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+.auth-message::before {
+  content: "•";
+  color: var(--sage);
+  font-size: 18px;
+  line-height: 1;
+}
+.auth-message.error {
+  border-color: var(--leaf);
+}
+.auth-card-register {
+  width: min(100%, 850px);
+}
+.auth-card-register .auth-subtitle {
+  max-width: 630px;
+}
+.register-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 18px;
+  row-gap: 16px;
+}
+.register-grid > .field-full {
+  grid-column: 1 / -1;
+}
+.register-grid .auth-submit,
+.register-grid .password-rules,
+.register-grid .auth-inline-note {
+  grid-column: 1 / -1;
+}
+.password-rules {
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--forest) 65%, transparent);
+}
+.password-rules[hidden] {
+  display: none !important;
+}
+.password-rules-title {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 9px;
+}
+.password-rules-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 13px;
+  padding: 0;
+  margin: 0;
+}
+.password-rules-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  transition: color 0.18s ease;
+}
+.password-rules-list li::before {
+  content: "○";
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  border: 1px solid var(--leaf);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 10px;
+}
+.password-rules-list li.is-met {
+  color: var(--mint);
+}
+.password-rules-list li.is-met::before {
+  content: "✓";
+  background: var(--sage);
+  border-color: var(--sage);
+  color: var(--deep);
+  font-weight: 800;
+}
+.password-progress {
+  height: 3px;
+  margin-top: 12px;
+  background: var(--leaf);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.password-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--sage);
+  transition: width 0.2s ease;
+}
+.auth-inline-note {
+  color: var(--muted) !important;
+  font-size: 11px;
+  margin-top: -5px;
+  line-height: 1.6;
+}
+.auth-form .auth-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.6;
+}
+.auth-form .auth-check input {
+  width: auto;
+  min-height: 0;
+  margin-top: 3px;
+  accent-color: var(--sage);
+}
+.auth-result-card {
+  width: min(100%, 560px);
+}
+.auth-result-card .auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Motion, spacing and responsive refinements. */
+@media (min-width: 1001px) {
+  .index-page main {
+    padding-top: 0;
+  }
+  .index-page .hero-copy {
+    scroll-margin-top: var(--head);
+  }
+}
+@media (max-width: 1100px) {
+  .bundle-card {
+    grid-template-columns: minmax(145px, 0.75fr) minmax(0, 1.25fr) !important;
+  }
+  .auth-page.is-register {
+    grid-template-columns: minmax(250px, 0.65fr) minmax(0, 1.35fr);
+  }
+  .auth-page.is-register .auth-panel {
+    padding: 28px;
+  }
+}
+@media (max-width: 900px) {
+  .container {
+    width: min(100% - 40px, 760px);
+  }
+  .main-nav {
+    display: none !important;
+  }
+  .mobile-nav {
+    display: block !important;
+  }
+  .contact-section {
+    grid-template-columns: 1fr !important;
+    gap: 30px;
+  }
+  .bundle-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .bundle-card {
+    grid-template-columns: minmax(160px, 0.8fr) minmax(0, 1.2fr) !important;
+  }
+  .auth-page,
+  .auth-page.is-register {
+    grid-template-columns: 1fr;
+  }
+  .auth-visual {
+    min-height: 270px;
+    padding: 25px 28px;
+  }
+  .auth-visual-copy {
+    padding: 30px 0 20px;
+  }
+  .auth-visual-copy h1 {
+    font-size: clamp(42px, 8vw, 60px);
+  }
+  .auth-visual-foot {
+    display: none;
+  }
+  .auth-visual::before {
+    width: 280px;
+    right: -80px;
+    bottom: -190px;
+  }
+  .auth-visual::after {
+    width: 110px;
+    height: 110px;
+    bottom: 10px;
+    right: 70px;
+  }
+  .auth-panel {
+    padding: 34px 24px 50px;
+  }
+  .auth-card-register {
+    width: min(100%, 760px);
+  }
+}
+@media (max-width: 620px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+  .header-actions {
+    gap: 8px !important;
+  }
+  .account-link {
+    display: none;
+  }
+  .header-actions .register-link {
+    display: inline-flex !important;
+  }
+  .contact-fields,
+  .register-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .register-grid > *,
+  .register-grid > .field-full,
+  .register-grid .auth-submit,
+  .register-grid .password-rules,
+  .register-grid .auth-inline-note {
+    grid-column: 1 / -1;
+  }
+  .password-rules-list {
+    grid-template-columns: 1fr;
+  }
+  .contact-section {
+    padding: 27px 18px !important;
+    border-radius: var(--radius-md) !important;
+  }
+  .contact-form-card {
+    padding: 21px 16px !important;
+  }
+  .contact-intro h2,
+  .about-strip h2 {
+    font-size: clamp(38px, 11vw, 56px);
+  }
+  .bundle-card {
+    grid-template-columns: 1fr !important;
+  }
+  .bundle-photo {
+    min-height: 235px;
+  }
+  .bundle-photo img {
+    min-height: 235px;
+  }
+  .auth-visual {
+    min-height: 230px;
+  }
+  .auth-visual-copy {
+    padding: 24px 0 8px;
+  }
+  .auth-panel {
+    padding: 28px 18px 40px;
+  }
+  .auth-back {
+    margin-bottom: 24px;
+  }
+  .auth-card h2 {
+    font-size: 35px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* NABTA refinement pass — consistent 8/16/32 spacing, editorial cards and calm transitions. */
+.garden-home #main > .container > section:not(.promo-slider) {
+  min-height: 0 !important;
+  margin-block: var(--space-2) !important;
+  padding-block: var(--space-3) !important;
+  padding-inline: max(var(--space-2), calc((100vw - 1400px) / 2)) !important;
+  border-top: 1px solid color-mix(in srgb, var(--sage) 22%, transparent) !important;
+}
+.garden-home .section-top,
+.garden-home .section-head-v3 {
+  gap: var(--space-2) !important;
+  margin-bottom: var(--space-3) !important;
+}
+.garden-home .paths-grid,
+.garden-home .products-grid,
+.garden-home .bundle-grid {
+  gap: var(--space-2) !important;
+}
+.garden-home
+  :is(
+    .product-card,
+    .path-card,
+    .bundle-card,
+    .contact-form-card,
+    .faq-item,
+    .benefit,
+    .editorial,
+    .about-strip
+  ) {
+  border-radius: var(--radius-md) !important;
+}
+.garden-home .product-card,
+.garden-home .path-card,
+.garden-home .bundle-card {
+  overflow: hidden !important;
+  transform: translateZ(0);
+  transition:
+    transform 0.42s var(--ease),
+    border-color 0.35s ease,
+    box-shadow 0.42s var(--ease) !important;
+}
+.garden-home .product-card:hover,
+.garden-home .path-card:hover,
+.garden-home .bundle-card:hover {
+  transform: translateY(-6px) scale(1.012);
+  border-color: var(--sage) !important;
+  box-shadow: var(--shadow-hover) !important;
+}
+.garden-home .path-card img {
+  transform: scale(1.001);
+  transition:
+    transform 0.8s var(--ease),
+    filter 0.6s ease !important;
+  will-change: transform;
+}
+.garden-home .path-card:hover img,
+.garden-home .path-card:focus-visible img {
+  transform: scale(1.09);
+  filter: saturate(1.08);
+}
+.garden-home .path-card > div {
+  z-index: 2;
+}
+.garden-home .path-card .path-number,
+.garden-home .path-card .path-arrow {
+  z-index: 3;
+  width:20px;
+  text-align:center;
+  border-radius: 10px !important;
+}
+.garden-home .product-visual {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 !important;
+  aspect-ratio: 4 / 4.65;
+  background: var(--wood) !important;
+}
+.garden-home .product-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.8s var(--ease),
+    filter 0.45s ease !important;
+  will-change: transform;
+}
+.garden-home .product-card:hover .product-visual img,
+.garden-home .product-card:focus-within .product-visual img {
+  transform: scale(1.085);
+  filter: saturate(1.06);
+}
+.garden-home .product-info {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+  padding: var(--space-2) !important;
+  min-height: 150px;
+  background: linear-gradient(
+    180deg,
+    var(--surface),
+    color-mix(in srgb, var(--wood) 50%, var(--surface))
+  ) !important;
+}
+.garden-home .product-info h3 {
+  margin: 0 !important;
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.35;
+}
+.garden-home .product-info h3 a {
+  text-decoration: none;
+}
+.garden-home .product-info .price {
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+.garden-home .product-info p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.product-rating {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  font-size: 11px;
+  color: var(--sage) !important;
+  min-height: 16px;
+}
+.product-rating .stars {
+  color: var(--sage) !important;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+}
+.product-rating .rating-value {
+  color: var(--mint) !important;
+  font-weight: 700;
+}
+.product-rating .rating-note {
+  color: var(--muted) !important;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.garden-home .product-tag {
+  top: var(--space-2) !important;
+  left: var(--space-2) !important;
+  border-radius: 999px !important;
+  padding: var(--space-1) var(--space-2) !important;
+  backdrop-filter: blur(12px);
+}
+.garden-home .product-browse {
+  border-radius: 999px !important;
+  transform: translateY(8px);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease !important;
+}
+.garden-home .product-card:hover .product-browse,
+.garden-home .product-card:focus-within .product-browse {
+  opacity: 1;
+  transform: translateY(0);
+}
+.garden-home .section-base {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-block: var(--space-2) !important;
+  margin-top: var(--space-2);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+/* A smooth, layered hero wash improves copy contrast without texture or visual noise. */
+.garden-home .hero-copy {
+  isolation: isolate;
+}
+.garden-home .hero-copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -64px;
+  top: 11%;
+  bottom: 9%;
+  width: min(760px, 75vw);
+  border-radius: 48% 52% 58% 42%;
+  background: radial-gradient(
+    ellipse at 28% 47%,
+    color-mix(in srgb, var(--deep) 84%, transparent) 0%,
+    color-mix(in srgb, var(--forest) 62%, transparent) 48%,
+    transparent 78%
+  );
+  filter: blur(22px);
+  pointer-events: none;
+}
+.garden-home .hero-copy .eyebrow {
+  color: var(--mint) !important;
+}
+.garden-home .hero-copy > p {
+  color: var(--mint) !important;
+  text-shadow: 0 2px 24px color-mix(in srgb, var(--deep) 70%, transparent);
+}
+.garden-home .hero h1 em,
+.garden-home .hero-heading em {
+  color: var(--sage) !important;
+}
+.garden-home .hero-bottom {
+  text-align: left;
+}
+
+/* Slider: automatic three-second advance, centered index labels, room for the header. */
+.garden-home .promo-slider {
+  min-height: 100svh;
+  height: 100svh;
+}
+.garden-home .slider-controls {
+  left: 50% !important;
+  right: auto !important;
+  bottom: var(--space-3) !important;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-1) !important;
+  width: max-content;
+  max-width: calc(100% - 32px);
+}
+.garden-home .slider-controls label {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center !important;
+  padding: var(--space-1) 0 0 !important;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.garden-home .promo-slide.hero {
+  transition:
+    opacity 0.72s ease,
+    visibility 0.72s ease !important;
+}
+.garden-home .hero-media > img {
+  transition:
+    transform 3.8s ease-out,
+    filter 0.6s ease !important;
+}
+.garden-home .hero .btn {
+  border-radius: 999px !important;
+}
+
+/* Auth screens reuse the hero photograph with a soft forest overlay. */
+.auth-page {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--deep) !important;
+  background-image:
+    linear-gradient(
+      110deg,
+      color-mix(in srgb, var(--deep) 90%, transparent),
+      color-mix(in srgb, var(--forest) 76%, transparent) 52%,
+      color-mix(in srgb, var(--deep) 87%, transparent)
+    ),
+    url("../img/garden-sky.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed;
+}
+.auth-visual {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--forest) 83%, transparent),
+    color-mix(in srgb, var(--deep) 73%, transparent)
+  ) !important;
+  border-right-color: color-mix(
+    in srgb,
+    var(--sage) 38%,
+    transparent
+  ) !important;
+  padding: var(--space-3) !important;
+}
+.auth-panel {
+  background: color-mix(in srgb, var(--deep) 52%, transparent) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.auth-card {
+  border: 1px solid color-mix(in srgb, var(--sage) 32%, transparent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) !important;
+  background: color-mix(in srgb, var(--deep) 76%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+.auth-card-register {
+  width: min(100%, 920px) !important;
+}
+.auth-card h2 {
+  margin-bottom: var(--space-1) !important;
+}
+.auth-subtitle {
+  margin-bottom: var(--space-2) !important;
+}
+.auth-form {
+  gap: var(--space-2) !important;
+}
+.auth-form label {
+  gap: var(--space-1) !important;
+}
+.auth-form input {
+  min-height: 48px !important;
+  padding: 12px 16px !important;
+  border-radius: var(--radius-sm) !important;
+  background: color-mix(in srgb, var(--deep) 30%, transparent) !important;
+}
+.auth-form input:hover {
+  background: color-mix(in srgb, var(--leaf) 24%, transparent) !important;
+}
+.auth-form input:focus {
+  background: color-mix(in srgb, var(--leaf) 18%, transparent) !important;
+}
+.register-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--space-2) !important;
+}
+.register-grid > .field-full {
+  grid-column: auto !important;
+}
+.register-grid .auth-submit {
+  grid-column: 1 / -1;
+  margin-top: var(--space-1) !important;
+}
+.register-grid .auth-inline-note {
+  grid-column: 2;
+  align-self: center;
+  margin: 0 !important;
+  padding: 0 var(--space-1);
+}
+.register-grid > .password-field {
+  position: relative;
+  z-index: 3;
+}
+.password-rules {
+  position: absolute !important;
+  z-index: 100 !important;
+  top: 38px;
+  right: calc(100% + var(--space-2));
+  width: min(300px, 38vw);
+  padding: var(--space-2) !important;
+  border: 1px solid var(--sage) !important;
+  border-radius: var(--radius-md) !important;
+  background: color-mix(in srgb, var(--deep) 94%, transparent) !important;
+  box-shadow: var(--shadow-hover) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: password-cloud-in 0.18s var(--ease) both;
+}
+.password-rules::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 23px;
+  width: 12px;
+  height: 12px;
+  background: var(--deep);
+  border-top: 1px solid var(--sage);
+  border-right: 1px solid var(--sage);
+  transform: rotate(45deg);
+}
+@keyframes password-cloud-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+.password-rules[hidden] {
+  display: none !important;
+}
+.password-rules-list {
+  grid-template-columns: 1fr 1fr !important;
+  gap: var(--space-1) !important;
+}
+.password-rules-title {
+  margin: 0 0 var(--space-1) !important;
+}
+.auth-submit {
+  min-height: 48px !important;
+  margin-top: var(--space-1) !important;
+}
+.auth-switch {
+  margin-top: var(--space-2) !important;
+}
+
+/* Responsive tuning — retain rhythm while collapsing grids cleanly. */
+@media (max-width: 1100px) {
+  .auth-card {
+    padding: var(--space-2) !important;
+  }
+  .password-rules {
+    width: min(280px, 34vw);
+  }
+}
+@media (max-width: 900px) {
+  .garden-home .hero-copy {
+    width: calc(100% - 64px);
+  }
+  .garden-home .hero-copy::before {
+    left: -24px;
+    width: min(690px, 88vw);
+  }
+  .auth-page {
+    background-attachment: scroll;
+  }
+  .auth-visual {
+    min-height: 280px !important;
+  }
+  .auth-panel {
+    padding: var(--space-3) var(--space-2) !important;
+  }
+  .password-rules {
+    left: 0;
+    right: auto;
+    top: calc(100% + var(--space-1));
+    width: min(320px, 78vw);
+  }
+  .password-rules::after {
+    right: auto;
+    left: 24px;
+    top: -7px;
+    transform: rotate(-45deg);
+  }
+}
+@media (max-width: 620px) {
+  .garden-home #main > .container > section:not(.promo-slider) {
+    margin-block: var(--space-1) !important;
+    padding-block: var(--space-2) !important;
+    padding-inline: var(--space-2) !important;
+  }
+  .garden-home .hero-copy {
+    width: calc(100% - 32px);
+    padding: 90px 0 105px !important;
+  }
+  .garden-home .hero-copy::before {
+    left: -12px;
+    top: 17%;
+    bottom: 10%;
+    width: calc(100vw - 16px);
+    filter: blur(16px);
+  }
+  .garden-home .hero h1,
+  .garden-home .hero-heading {
+    font-size: clamp(42px, 12vw, 64px) !important;
+  }
+  .garden-home .slider-controls {
+    bottom: var(--space-2) !important;
+  }
+  .garden-home .slider-controls label {
+    width: 36px !important;
+  }
+  .garden-home .slider-controls label[for="promo-0"],
+  .garden-home .slider-controls label[for="promo-1"],
+  .garden-home .slider-controls label[for="promo-2"] {
+    width: 56px !important;
+  }
+  .garden-home .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--space-1) !important;
+  }
+  .garden-home .product-info {
+    padding: var(--space-1) !important;
+    min-height: 140px;
+  }
+  .garden-home .product-info h3 {
+    font-size: 13px;
+  }
+  .garden-home .product-info .price {
+    font-size: 13px;
+  }
+  .garden-home .product-rating {
+    gap: 4px;
+    font-size: 10px;
+  }
+  .garden-home .product-rating .stars {
+    font-size: 10px;
+  }
+  .garden-home .product-browse {
+    opacity: 1;
+    transform: none;
+  }
+  .auth-visual {
+    min-height: 220px !important;
+    padding: var(--space-2) !important;
+  }
+  .auth-panel {
+    padding: var(--space-2) !important;
+  }
+  .auth-card {
+    padding: var(--space-2) !important;
+    border-radius: var(--radius-md) !important;
+  }
+  .register-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .register-grid .auth-inline-note {
+    grid-column: 1 !important;
+  }
+  .register-grid .auth-submit {
+    grid-column: 1 !important;
+  }
+  .password-rules {
+    left: 0;
+    width: min(300px, calc(100vw - 48px));
+  }
+  .password-rules-list {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 380px) {
+  .garden-home .products-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .garden-home .product-visual {
+    aspect-ratio: 4 / 4.2;
+  }
+  .auth-card h2 {
+    font-size: 32px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .garden-home .product-card,
+  .garden-home .path-card,
+  .garden-home .bundle-card,
+  .garden-home .product-visual img,
+  .garden-home .path-card img {
+    transition: none !important;
+  }
+}
+
+/* HERO REFINEMENT — staggered bottom-up copy, first-slide foliage, left-aligned index. */
+.garden-home .promo-slider {
+  position: relative;
+  isolation: isolate;
+}
+.garden-home .alive {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.55s ease,
+    visibility 0.55s ease;
+}
+/* The branch and drifting leaves belong to the opening image only. */
+.garden-home .promo-slider:has(#promo-1:checked) .alive,
+.garden-home .promo-slider:has(#promo-2:checked) .alive {
+  opacity: 0;
+  visibility: hidden;
+}
+.garden-home .promo-slider:has(#promo-0:checked) .alive {
+  opacity: 1;
+  visibility: visible;
+}
+/* Let the two botanical branches enter once on the initial load; no repeated entrance on slide changes. */
+.garden-home .alive .fol-a {
+  transform-origin: 0 0;
+  animation:
+    nabta-branch-in 1.65s cubic-bezier(0.18, 0.72, 0.2, 1) both,
+    sway 10s ease-in-out 1.65s infinite alternate;
+}
+.garden-home .alive .fol-b {
+  transform-origin: 100% 0;
+  animation:
+    nabta-branch-in-right 1.9s cubic-bezier(0.18, 0.72, 0.2, 1) both,
+    sway 11s ease-in-out 1.9s infinite alternate;
+}
+@keyframes nabta-branch-in {
+  from {
+    opacity: 0;
+    translate: -34px -22px;
+    rotate: -5deg;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+@keyframes nabta-branch-in-right {
+  from {
+    opacity: 0;
+    translate: 34px -20px;
+    rotate: 5deg;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+.garden-home .alive .p {
+  will-change: translate, opacity;
+}
+/* All hero copy, including the eyebrow and supporting line, rises into place in a calm sequence. */
+.garden-home .hero-copy > .eyebrow,
+.garden-home .hero-copy > h1,
+.garden-home .hero-copy > .hero-heading,
+.garden-home .hero-copy > p,
+.garden-home .hero-copy > .cta-row,
+.garden-home .hero-copy > .hero-bottom {
+  opacity: 0;
+}
+.garden-home
+  .promo-slider:has(#promo-0:checked)
+  .slide-0
+  .hero-copy
+  > :is(.eyebrow, h1, .hero-heading, p, .cta-row, .hero-bottom),
+.garden-home
+  .promo-slider:has(#promo-1:checked)
+  .slide-1
+  .hero-copy
+  > :is(.eyebrow, h1, .hero-heading, p, .cta-row, .hero-bottom),
+.garden-home
+  .promo-slider:has(#promo-2:checked)
+  .slide-2
+  .hero-copy
+  > :is(.eyebrow, h1, .hero-heading, p, .cta-row, .hero-bottom) {
+  animation: nabta-copy-rise 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+.garden-home .promo-slider:has(#promo-0:checked) .slide-0 .hero-copy > .eyebrow,
+.garden-home .promo-slider:has(#promo-1:checked) .slide-1 .hero-copy > .eyebrow,
+.garden-home
+  .promo-slider:has(#promo-2:checked)
+  .slide-2
+  .hero-copy
+  > .eyebrow {
+  animation-delay: 0.12s;
+}
+.garden-home
+  .promo-slider:has(#promo-0:checked)
+  .slide-0
+  .hero-copy
+  > :is(h1, .hero-heading),
+.garden-home
+  .promo-slider:has(#promo-1:checked)
+  .slide-1
+  .hero-copy
+  > :is(h1, .hero-heading),
+.garden-home
+  .promo-slider:has(#promo-2:checked)
+  .slide-2
+  .hero-copy
+  > :is(h1, .hero-heading) {
+  animation-delay: 0.24s;
+}
+.garden-home .promo-slider:has(#promo-0:checked) .slide-0 .hero-copy > p,
+.garden-home .promo-slider:has(#promo-1:checked) .slide-1 .hero-copy > p,
+.garden-home .promo-slider:has(#promo-2:checked) .slide-2 .hero-copy > p {
+  animation-delay: 0.38s;
+}
+.garden-home .promo-slider:has(#promo-0:checked) .slide-0 .hero-copy > .cta-row,
+.garden-home .promo-slider:has(#promo-1:checked) .slide-1 .hero-copy > .cta-row,
+.garden-home
+  .promo-slider:has(#promo-2:checked)
+  .slide-2
+  .hero-copy
+  > .cta-row {
+  animation-delay: 0.5s;
+}
+.garden-home
+  .promo-slider:has(#promo-0:checked)
+  .slide-0
+  .hero-copy
+  > .hero-bottom,
+.garden-home
+  .promo-slider:has(#promo-1:checked)
+  .slide-1
+  .hero-copy
+  > .hero-bottom,
+.garden-home
+  .promo-slider:has(#promo-2:checked)
+  .slide-2
+  .hero-copy
+  > .hero-bottom {
+  animation-delay: 0.62s;
+}
+@keyframes nabta-copy-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+/* Keep the headline's per-word unfurl from fighting the overall copy entrance. */
+.garden-home .hero-copy h1 .w,
+.garden-home .hero-copy .hero-heading .w {
+  animation-delay: 0.45s;
+}
+.garden-home .hero-copy .eyebrow:not(.eyebrow-offer) {
+  display: inline-block !important;
+}
+.garden-home .hero-copy .hero-bottom {
+  display: flex !important;
+  justify-content: space-between;
+  gap: var(--space-2);
+  color: var(--mint);
+}
+.garden-home .hero-bottom span {
+  color: var(--mint) !important;
+  margin-bottom:30px;
+}
+/* Numbering sits at the lower-left of the hero image, with each number centered in its hit area. */
+.garden-home .slider-controls {
+  left: clamp(24px, 4.5vw, 72px) !important;
+  right: auto !important;
+  bottom: clamp(24px, 4.5vh, 48px) !important;
+  transform: none !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  z-index: 8;
+}
+.garden-home .slider-controls label {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center !important;
+  min-height: 30px;
+  padding: 7px 0 0 !important;
+  font-variant-numeric: tabular-nums;
+}
+.garden-home .slider-controls label .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 760px) {
+  .garden-home .hero-copy {
+    padding-top: calc(var(--head) + 48px) !important;
+    padding-bottom: 130px !important;
+  }
+  .garden-home .slider-controls {
+    left: 20px !important;
+    bottom: 22px !important;
+  }
+  .garden-home .hero-copy > .hero-bottom {
+    display: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .garden-home .hero-copy > .eyebrow,
+  .garden-home .hero-copy > h1,
+  .garden-home .hero-copy > .hero-heading,
+  .garden-home .hero-copy > p,
+  .garden-home .hero-copy > .cta-row,
+  .garden-home .hero-copy > .hero-bottom,
+  .garden-home .alive .fol-a,
+  .garden-home .alive .fol-b {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* FINAL REQUEST: separate About page, transparent-at-top navigation, per-slide image tone. */
+.index-page .header:not(.is-scrolled),
+.about-page .header:not(.is-scrolled) {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.index-page .header.is-scrolled,
+.about-page .header.is-scrolled {
+  background: color-mix(in srgb, var(--deep) 91%, transparent) !important;
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--leaf) 75%,
+    transparent
+  ) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(130%) !important;
+  backdrop-filter: blur(20px) saturate(130%) !important;
+}
+/* Opening slide: preserve the original garden photograph; only a subtle caption fade remains. */
+.garden-home .promo-slider:has(#promo-0:checked) .slide-0 .hero-media > img {
+  filter: saturate(1.1) brightness(1.05) !important;
+}
+.garden-home .promo-slider:has(#promo-0:checked) .slide-0 .hero-media::after {
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--deep) 36%, transparent) 0%,
+    color-mix(in srgb, var(--deep) 12%, transparent) 28%,
+    transparent 48%
+  ) !important;
+}
+/* Second slide: preserve the photograph's natural light; no dark veil over the image. */
+.garden-home .promo-slider:has(#promo-1:checked) .slide-1 .hero-media > img {
+  filter: saturate(1.04) brightness(1.02) contrast(1.01) !important;
+}
+.garden-home .promo-slider:has(#promo-1:checked) .slide-1 .hero-media::after {
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--deep) 24%, transparent) 0%,
+    color-mix(in srgb, var(--deep) 7%, transparent) 20%,
+    transparent 42%
+  ) !important;
+}
+/* Third slide retains the current brighter editorial treatment. */
+.garden-home .promo-slider:has(#promo-2:checked) .slide-2 .hero-media > img {
+  filter: saturate(1.1) brightness(1.05) !important;
+}
+.garden-home .promo-slider:has(#promo-2:checked) .slide-2 .hero-media::after {
+  background:
+    linear-gradient(
+      96deg,
+      color-mix(in srgb, var(--forest) 66%, transparent) 0%,
+      color-mix(in srgb, var(--wood) 30%, transparent) 40%,
+      color-mix(in srgb, var(--wood) 0%, transparent) 70%
+    ),
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--forest) 50%, transparent),
+      transparent 38%
+    ) !important;
+}
+
+/* A dedicated About page, separate from the landing page's content flow. */
+.about-page {
+  overflow-x: clip;
+}
+.about-page-main {
+  padding-top: 0 !important;
+}
+.about-hero {
+  min-height: min(88svh, 940px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+  padding: calc(var(--head) + 72px) clamp(24px, 7vw, 112px) 72px;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--deep) 95%, transparent) 0%,
+      color-mix(in srgb, var(--deep) 83%, transparent) 44%,
+      color-mix(in srgb, var(--deep) 36%, transparent) 100%
+    ),
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--deep) 70%, transparent),
+      transparent 60%
+    ),
+    url("../img/garden-sky.jpg") center 48% / cover no-repeat;
+}
+.about-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 75% 35%,
+    color-mix(in srgb, var(--sage) 14%, transparent),
+    transparent 54%
+  );
+}
+.about-hero-copy {
+  width: min(760px, 100%);
+  margin-inline: auto;
+}
+.about-hero .eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  color: var(--sage) !important;
+}
+.about-hero h1 {
+  font-size: clamp(48px, 7.2vw, 104px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 350;
+  margin: 0 0 var(--space-3);
+  color: var(--mint);
+}
+.about-hero h1 em,
+.about-story-copy h2 em,
+.about-values h2 em,
+.about-cta h2 em {
+  color: var(--sage);
+  font-style: normal;
+}
+.about-hero-copy > p {
+  max-width: 540px;
+  line-height: 1.85;
+  font-size: clamp(15px, 1.3vw, 18px);
+  color: var(--mint) !important;
+  text-shadow: 0 2px 24px color-mix(in srgb, var(--deep) 75%, transparent);
+}
+.about-hero .cta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.about-hero-note {
+  display: block;
+  margin-top: clamp(48px, 9vh, 104px);
+  color: var(--sage);
+  letter-spacing: 0.16em;
+  font-size: 10px;
+}
+.about-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: clamp(24px, 6vw, 84px);
+  align-items: center;
+  padding-block: clamp(64px, 10vw, 132px) !important;
+}
+.about-story-image {
+  min-height: 460px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+}
+.about-story-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 460px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s var(--ease);
+}
+.about-story-image:hover img {
+  transform: scale(1.035);
+}
+.about-story-copy h2 {
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 360;
+  line-height: 1.05;
+  margin: var(--space-2) 0 var(--space-3);
+}
+.about-story-copy p {
+  line-height: 1.9;
+  margin: 0 0 var(--space-2);
+  max-width: 560px;
+}
+.about-values {
+  padding-block: clamp(56px, 8vw, 104px) !important;
+  border-top: 1px solid var(--line);
+}
+.about-values .section-top {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  align-items: end;
+  margin-bottom: var(--space-3);
+}
+.about-values h2 {
+  font-size: clamp(38px, 5vw, 70px);
+  line-height: 1.03;
+  font-weight: 360;
+  margin: var(--space-2) 0 0;
+}
+.about-values .section-top > p {
+  max-width: 330px;
+  line-height: 1.8;
+}
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.about-value {
+  min-height: 246px;
+  padding: clamp(22px, 3vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--forest) 94%, transparent),
+    color-mix(in srgb, var(--wood) 62%, transparent)
+  );
+  transition:
+    transform 0.28s var(--ease),
+    border-color 0.28s ease,
+    background 0.28s ease;
+}
+.about-value:hover {
+  transform: translateY(-5px);
+  border-color: var(--sage);
+  background: var(--surface);
+}
+.about-value > span {
+  color: var(--sage);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+.about-value h3 {
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 450;
+  line-height: 1.18;
+  margin: var(--space-3) 0 var(--space-2);
+}
+.about-value p {
+  line-height: 1.8;
+  margin: 0;
+}
+.about-cta {
+  text-align: center;
+  padding: clamp(56px, 9vw, 112px) var(--space-3) !important;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  margin-block: var(--space-3) !important;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      color-mix(in srgb, var(--leaf) 65%, transparent),
+      transparent 70%
+    ),
+    var(--surface);
+}
+.about-cta h2 {
+  font-size: clamp(38px, 5.5vw, 76px);
+  line-height: 1.02;
+  font-weight: 360;
+  margin: var(--space-2) 0 var(--space-3);
+}
+.about-cta .btn {
+  display: inline-flex;
+}
+.about-page .footer {
+  margin-top: var(--space-3);
+}
+@media (max-width: 760px) {
+  .about-hero {
+    min-height: 82svh;
+    padding: calc(var(--head) + 56px) 24px 48px;
+    background-position: 61% center;
+  }
+  .about-hero h1 {
+    font-size: clamp(44px, 13vw, 66px);
+  }
+  .about-hero-note {
+    margin-top: 48px;
+    font-size: 9px;
+  }
+  .about-story {
+    grid-template-columns: 1fr;
+  }
+  .about-story-image,
+  .about-story-image img {
+    min-height: 300px;
+  }
+  .about-values .section-top {
+    display: block;
+  }
+  .about-values .section-top > p {
+    margin-top: var(--space-2);
+  }
+  .about-values-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-value {
+    min-height: 0;
+  }
+  .about-cta {
+    margin-inline: 0 !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-story-image img,
+  .about-value {
+    transition: none !important;
+  }
+  .about-value:hover {
+    transform: none;
+  }
+}
+
+/* Transparent header at the top: use Nabta's deepest palette tone for navigation text.
+   Once the glass header appears on scroll, retain the original light text for contrast. */
+.index-page .header:not(.is-scrolled) .logo,
+.index-page .header:not(.is-scrolled) .main-nav > a,
+.index-page .header:not(.is-scrolled) .header-actions > a,
+.index-page .header:not(.is-scrolled) .header-actions > .logout-form > button,
+.index-page .header:not(.is-scrolled) .mobile-nav > summary {
+  color: var(--mint) !important;
+  text-shadow: 0 1px 8px color-mix(in srgb, var(--mint) 62%, transparent);
+}
+.index-page .header:not(.is-scrolled) .logo-sub {
+  color: var(--mint) !important;
+}
+.index-page .header:not(.is-scrolled) .leaf-logo,
+.index-page .header:not(.is-scrolled) .header-actions > a .icon {
+  stroke: var(--mint) !important;
+}
+.index-page .header:not(.is-scrolled) .main-nav a::after {
+  background: var(--wood) !important;
+}
+.index-page .header:not(.is-scrolled) .main-nav > a:hover,
+.index-page .header:not(.is-scrolled) .header-actions > a:hover,
+.index-page
+  .header:not(.is-scrolled)
+  .header-actions
+  > .logout-form
+  > button:hover {
+  color: var(--leaf) !important;
+}
+.index-page .header:not(.is-scrolled) .register-link {
+  border-color: var(--wood) !important;
+}
+.index-page .header:not(.is-scrolled) .mobile-nav > summary {
+  border-color: var(--wood) !important;
+}
+
+/* V7 refinement: keep the logo in its original header position, with clear account actions. */
+.index-page .header .logo {
+  opacity: 1;
+  pointer-events: auto;
+}
+.header .logo {
+  transition: none;
+}
+.header .login-cta,
+.header .register-cta {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 17px !important;
+  border-radius: 999px !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.header .login-cta {
+  background: var(--leaf) !important;
+  color: var(--mint) !important;
+  border: 1px solid var(--leaf) !important;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--deep) 14%, transparent);
+}
+.header .register-cta {
+  background: transparent !important;
+  color: var(--mint) !important;
+  border: 1px solid var(--sage) !important;
+}
+.header .login-cta:hover,
+.index-page .header:not(.is-scrolled) .login-cta:hover {
+  background: var(--sage) !important;
+  border-color: var(--sage) !important;
+  color: var(--deep) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--deep) 20%, transparent);
+}
+.header .register-cta:hover,
+.index-page .header:not(.is-scrolled) .register-cta:hover {
+  background: var(--sage) !important;
+  border-color: var(--sage) !important;
+  color: var(--deep) !important;
+  transform: translateY(-1px);
+}
+.index-page .header:not(.is-scrolled) .header-actions > a.login-cta {
+  color: var(--mint) !important;
+  text-shadow: none !important;
+}
+.index-page .header:not(.is-scrolled) .header-actions > a.register-cta {
+  color: var(--deep) !important;
+  text-shadow: none !important;
+}
+@media (max-width: 760px) {
+  .header .login-cta,
+  .header .register-cta {
+    min-height: 36px;
+    padding: 7px 11px !important;
+    font-size: 11px;
+  }
+  .header-actions {
+    gap: 7px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header .login-cta,
+  .header .register-cta,
+  .header .logo {
+    transition: none !important;
+  }
+}
+
+/* V11: the third hero slide has a darker visual, so use white header navigation
+   only while that slide is active. Basket receives its own filled surface too. */
+.index-page .header.is-third-slide:not(.is-scrolled) .logo,
+.index-page .header.is-third-slide:not(.is-scrolled) .logo-sub,
+.index-page .header.is-third-slide:not(.is-scrolled) .main-nav > a,
+.index-page
+  .header.is-third-slide:not(.is-scrolled)
+  .header-actions
+  > a:not(.login-cta),
+.index-page
+  .header.is-third-slide:not(.is-scrolled)
+  .header-actions
+  > .logout-form
+  > button,
+.index-page .header.is-third-slide:not(.is-scrolled) .mobile-nav > summary {
+  color: #fff !important;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 24%) !important;
+}
+.index-page .header.is-third-slide:not(.is-scrolled) .leaf-logo,
+.index-page .header.is-third-slide:not(.is-scrolled) .header-actions > a .icon {
+  stroke: var(--mint) !important;
+}
+.index-page .header.is-third-slide:not(.is-scrolled) .main-nav a::after {
+  background: #fff !important;
+}
+.index-page .header.is-third-slide:not(.is-scrolled) .main-nav > a:hover,
+.index-page
+  .header.is-third-slide:not(.is-scrolled)
+  .header-actions
+  > a:not(.login-cta):hover,
+.index-page
+  .header.is-third-slide:not(.is-scrolled)
+  .header-actions
+  > .logout-form
+  > button:hover {
+  color: #fff !important;
+}
+.index-page .header.is-third-slide:not(.is-scrolled) .mobile-nav > summary {
+  border-color: rgb(255 255 255 / 70%) !important;
+}
+
+/* Make the basket a clear, tactile action instead of a bare icon like the logo. */
+.header .header-actions > .bag-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 48px;
+  min-height: 44px;
+  padding: 9px 12px !important;
+  border-radius: 999px !important;
+  background: var(--leaf) !important;
+  border: 1px solid color-mix(in srgb, var(--sage) 65%, var(--leaf)) !important;
+  color: var(--mint) !important;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--deep) 20%, transparent);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.header .header-actions > .bag-link .icon {
+  width: 19px;
+  height: 19px;
+  stroke: var(--mint) !important;
+}
+.header .header-actions > .bag-link .bag-count {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  line-height: 1;
+  border-radius: 50%;
+  background: var(--mint) !important;
+  color: var(--deep) !important;
+  font-weight: 800;
+}
+.header .header-actions > .bag-link:hover {
+  background: var(--sage) !important;
+  border-color: var(--sage) !important;
+  color: var(--deep) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--deep) 25%, transparent);
+}
+.header .header-actions > .bag-link:hover .icon {
+  stroke: var(--deep) !important;
+}
+@media (max-width: 760px) {
+  .header .header-actions > .bag-link {
+    min-width: 40px;
+    min-height: 38px;
+    padding: 7px 9px !important;
+  }
+  .header .header-actions > .bag-link .bag-count{
+      width: 35px;
+  height: 17px;
+  line-height: 1;
+  border-radius: 9px;
+  }
+}
+
+/* V13: keep the basket icon white on every slide, with a green filled surface. */
+.header .header-actions > .bag-link,
+.header .header-actions > .bag-link:hover,
+.header.is-third-slide .header-actions > .bag-link,
+.header.is-third-slide .header-actions > .bag-link:hover {
+  background: #163832 !important;
+  border-color: #8eb69b !important;
+  color: #fff !important;
+}
+.header .header-actions > .bag-link .icon,
+.header .header-actions > .bag-link:hover .icon,
+.header.is-third-slide .header-actions > .bag-link .icon,
+.header.is-third-slide .header-actions > .bag-link:hover .icon {
+  stroke: #fff !important;
+}
+.header .header-actions > .bag-link .bag-count,
+.header .header-actions > .bag-link:hover .bag-count,
+.header.is-third-slide .header-actions > .bag-link .bag-count,
+.header.is-third-slide .header-actions > .bag-link:hover .bag-count {
+  background: #fff !important;
+  color: #051f20 !important;
+}
+
+/* Keep Phone and its optional note on one label row, above the input. */
+.auth-form label > .field-label-row {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  color: var(--mint) !important;
+  font-weight: 650 !important;
+  line-height: 1.35;
+}
+.auth-form label > .field-label-row > .optional-tag {
+  color: var(--muted) !important;
+  font-size: 11px;
+  font-weight: 400 !important;
+}
+
+
+/* V15 auth + brand refinements: white logo and a stable phone-label row. */
+.header .logo,
+.header .logo .logo-sub,
+.header .logo-sub,
+.auth-brand,
+.auth-brand .logo-sub {
+  color: #fff !important;
+}
+.header .leaf-logo,
+.auth-brand svg {
+  stroke: #fff !important;
+}
+.auth-brand svg {
+  fill: none !important;
+}
+.auth-form label > .field-label-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  width: 100%;
+  min-height: 18px;
+  white-space: nowrap;
+}
+.auth-form label > .field-label-row > .optional-tag {
+  display: inline !important;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin: 0 !important;
+}
+
+/* V16 FINAL FIX: force the header brand to pure white and darken the first two slide nav links. */
+.index-page .header .logo,
+.index-page .header .logo .logo-sub,
+.index-page .header .logo-sub,
+.index-page .header:not(.is-scrolled) .logo,
+.index-page .header:not(.is-scrolled) .logo-sub,
+.index-page .header.is-third-slide:not(.is-scrolled) .logo,
+.index-page .header.is-third-slide:not(.is-scrolled) .logo-sub {
+  color: #fff !important;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 28%) !important;
+}
+.index-page .header .leaf-logo,
+.index-page .header .leaf-logo path {
+  fill: none !important;
+  stroke: #fff !important;
+}
+
+/* The first and second hero slides use black navigation text at the top of the page. */
+.index-page .header:not(.is-scrolled):not(.is-third-slide) .main-nav > a {
+  color: #000 !important;
+  text-shadow: none !important;
+}
+.index-page .header:not(.is-scrolled):not(.is-third-slide) .main-nav > a::after {
+  background: #000 !important;
+}
+.index-page .header:not(.is-scrolled):not(.is-third-slide) .main-nav > a:hover,
+.index-page .header:not(.is-scrolled):not(.is-third-slide) .main-nav > a:focus-visible {
+  color: #163832 !important;
+}
+.index-page .header:not(.is-scrolled):not(.is-third-slide) .mobile-nav > summary {
+  color: #000 !important;
+  border-color: #000 !important;
+  text-shadow: none !important;
+}
+
+
+/* V17 — Collection cards: stronger contrast, editorial spacing, and action arrow below product details. */
+.garden-home .collection-refresh .collection-section-top {
+  align-items: end !important;
+  gap: 24px !important;
+  margin-bottom: clamp(24px, 3vw, 38px) !important;
+}
+.garden-home .collection-refresh .section-top .eyebrow,
+.garden-home .collection-refresh .eyebrow {
+  color: #a9c9ad !important;
+}
+.garden-home .collection-refresh .section-top h2,
+.garden-home .collection-refresh #collection-title {
+  color: #f3f2e9 !important;
+  max-width: 720px;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.garden-home .collection-refresh .collection-intro {
+  margin: 12px 0 0 !important;
+  max-width: 520px;
+  color: #c0d0c4 !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.garden-home .collection-refresh .collection-all-link {
+  color: #e0eddf !important;
+  white-space: nowrap;
+}
+.garden-home .collection-refresh .collection-all-link:hover {
+  color: #ffffff !important;
+}
+.garden-home .collection-refresh .collection-products-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(14px, 1.7vw, 24px) !important;
+}
+.garden-home .collection-refresh .collection-product-card {
+  display: flex !important;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden !important;
+  border: 1px solid rgba(185, 213, 184, 0.2) !important;
+  border-radius: 24px !important;
+  background: linear-gradient(155deg, #12352d 0%, #0a2722 100%) !important;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.16) !important;
+  transform: translateZ(0);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease !important;
+}
+.garden-home .collection-refresh .collection-product-card:hover,
+.garden-home .collection-refresh .collection-product-card:focus-within {
+  transform: translateY(-5px) !important;
+  border-color: rgba(190, 222, 186, 0.52) !important;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.26) !important;
+}
+.garden-home .collection-refresh .collection-product-visual {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.25;
+  border-radius: 0 !important;
+  background: #17362f !important;
+}
+.garden-home .collection-refresh .collection-product-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.2, 0.75, 0.2, 1), filter 0.4s ease !important;
+}
+.garden-home .collection-refresh .collection-product-card:hover .collection-product-visual img,
+.garden-home .collection-refresh .collection-product-card:focus-within .collection-product-visual img {
+  transform: scale(1.055) !important;
+  filter: saturate(1.05);
+}
+.garden-home .collection-refresh .collection-product-visual .product-tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  max-width: calc(100% - 30px);
+  padding: 8px 11px;
+  border: 1px solid rgba(237, 245, 231, 0.18);
+  border-radius: 999px;
+  background: rgba(5, 31, 32, 0.82) !important;
+  color: #f1f4e9 !important;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  line-height: 1.2;
+  backdrop-filter: blur(8px);
+}
+.garden-home .collection-refresh .collection-product-info {
+  display: flex !important;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  padding: 22px 21px 18px !important;
+  background: transparent !important;
+}
+.garden-home .collection-refresh .collection-product-copy {
+  min-width: 0;
+}
+.garden-home .collection-refresh .collection-product-info h3 {
+  margin: 0 0 12px !important;
+  color: #f4f2e9 !important;
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: clamp(20px, 1.65vw, 25px) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.025em;
+  line-height: 1.18 !important;
+}
+.garden-home .collection-refresh .collection-product-info h3 a {
+  color: #f4f2e9 !important;
+  text-decoration: none !important;
+  text-underline-offset: 4px;
+}
+.garden-home .collection-refresh .collection-product-info h3 a:hover {
+  color: #d7ead3 !important;
+  text-decoration: underline !important;
+}
+.garden-home .collection-refresh .collection-product-info .price {
+  display: block;
+  margin: 0 0 8px !important;
+  color: #d8e9ce !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.015em;
+  line-height: 1.4;
+}
+.garden-home .collection-refresh .collection-product-info .collection-sale-price del {
+  margin-right: 5px;
+  color: #aabbb0 !important;
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration-color: #aabbb0;
+}
+.garden-home .collection-refresh .collection-product-info p {
+  margin: 0 !important;
+  color: #c0d0c4 !important;
+  font-size: 12px !important;
+  line-height: 1.6;
+}
+.garden-home .collection-refresh .product-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(185, 213, 184, 0.18);
+  color: #e6efe0 !important;
+  text-decoration: none !important;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.garden-home .collection-refresh .product-card-action:hover {
+  color: #ffffff !important;
+}
+.garden-home .collection-refresh .product-card-action-icon {
+  display: inline-grid;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(202, 228, 196, 0.35);
+  border-radius: 50%;
+  background: rgba(202, 228, 196, 0.07);
+  color: #e6efe0;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.garden-home .collection-refresh .product-card-action-icon .icon {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+}
+.garden-home .collection-refresh .product-card-action:hover .product-card-action-icon,
+.garden-home .collection-refresh .product-card-action:focus-visible .product-card-action-icon {
+  background: #d8e9ce;
+  color: #082621;
+  transform: translateX(2px);
+}
+.garden-home .collection-refresh .collection-section-base {
+  color: #b7cabe !important;
+  border-color: rgba(185, 213, 184, 0.2) !important;
+}
+.garden-home .collection-refresh .collection-section-base span {
+  color: #b7cabe !important;
+}
+@media (max-width: 1050px) {
+  .garden-home .collection-refresh .collection-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px !important;
+  }
+  .garden-home .collection-refresh .collection-product-info h3 {
+    font-size: clamp(22px, 2.6vw, 27px) !important;
+  }
+}
+@media (max-width: 620px) {
+  .garden-home .collection-refresh .collection-section-top {
+    align-items: flex-start !important;
+    flex-direction: column;
+  }
+  .garden-home .collection-refresh .collection-all-link {
+    margin-top: 4px;
+  }
+  .garden-home .collection-refresh .collection-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px !important;
+  }
+  .garden-home .collection-refresh .collection-product-card {
+    border-radius: 18px !important;
+  }
+  .garden-home .collection-refresh .collection-product-visual {
+    aspect-ratio: 4 / 4.6;
+  }
+  .garden-home .collection-refresh .collection-product-visual .product-tag {
+    top: 9px;
+    left: 9px;
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+  .garden-home .collection-refresh .collection-product-info {
+    gap: 15px;
+    padding: 15px 13px 13px !important;
+  }
+  .garden-home .collection-refresh .collection-product-info h3 {
+    margin-bottom: 9px !important;
+    font-size: 18px !important;
+  }
+  .garden-home .collection-refresh .collection-product-info .price {
+    font-size: 13px !important;
+  }
+  .garden-home .collection-refresh .collection-product-info p {
+    font-size: 10px !important;
+  }
+  .garden-home .collection-refresh .product-card-action {
+    gap: 6px;
+    padding-top: 11px;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+  .garden-home .collection-refresh .product-card-action-icon {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 380px) {
+  .garden-home .collection-refresh .collection-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .garden-home .collection-refresh .collection-product-visual {
+    aspect-ratio: 4 / 3.7;
+  }
+  .garden-home .collection-refresh .collection-product-info {
+    padding: 18px !important;
+  }
+  .garden-home .collection-refresh .collection-product-info h3 {
+    font-size: 23px !important;
+  }
+  .garden-home .collection-refresh .collection-product-info .price {
+    font-size: 15px !important;
+  }
+  .garden-home .collection-refresh .collection-product-info p {
+    font-size: 12px !important;
+  }
+}
+
+
+/* V18 refinements: high-contrast collection heading, editorial FAQ, botanical auth glass. */
+.garden-home .collection-refresh .collection-section-top .eyebrow {
+  color: #b9d8ad !important;
+  font-size: 10px !important;
+  font-weight: 750 !important;
+  letter-spacing: .19em !important;
+  line-height: 1.6 !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .18);
+}
+.garden-home .collection-refresh .collection-section-top h2,
+.garden-home .collection-refresh #collection-title {
+  color: #fbf8ee !important;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, .18);
+}
+.garden-home .collection-refresh .collection-section-top .collection-intro,
+.garden-home .collection-refresh .collection-section-top p {
+  color: #d4e0d5 !important;
+  max-width: 570px;
+  line-height: 1.85 !important;
+  font-size: clamp(13px, 1.2vw, 15px) !important;
+}
+.garden-home .collection-refresh .collection-section-top .collection-all-link {
+  color: #f5f4e9 !important;
+  border-color: rgba(219, 237, 211, .45) !important;
+}
+.garden-home .collection-refresh .collection-section-top .collection-all-link:hover {
+  color: #d8ebcf !important;
+  border-color: #d8ebcf !important;
+}
+
+/* A calmer, editorial FAQ: one helpful intro panel and a clear numbered accordion. */
+.garden-home #faq.faq-refresh {
+  min-height: auto !important;
+  margin-block: clamp(28px, 5vw, 72px) !important;
+  padding: clamp(14px, 2.3vw, 28px) !important;
+  overflow: hidden;
+  border: 1px solid rgba(192, 219, 184, .17) !important;
+  border-radius: 30px !important;
+  color: #f4f5eb !important;
+  background:
+    radial-gradient(ellipse at 11% 9%, rgba(115, 147, 97, .18), transparent 44%),
+    linear-gradient(135deg, #102f29 0%, #0b2622 55%, #071e1b 100%) !important;
+  box-shadow: 0 26px 70px rgba(2, 17, 15, .19);
+}
+.garden-home #faq .faq-layout {
+  display: grid;
+  grid-template-columns: minmax(270px, .82fr) minmax(0, 1.18fr);
+  gap: clamp(16px, 2.4vw, 30px);
+  align-items: stretch;
+  max-width: 1380px;
+  min-width:100%;
+  margin-inline: auto;
+}
+.garden-home #faq .faq-intro-card,
+.garden-home #faq .faq-content-card {
+  min-width: 0;
+  border: 1px solid rgba(201, 224, 191, .15);
+  border-radius: 23px;
+  background: rgba(230, 241, 222, .035);
+}
+.garden-home #faq .faq-intro-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(22px, 3vw, 39px);
+}
+.garden-home #faq .faq-intro-top {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.garden-home #faq .faq-intro-top .eyebrow {
+  color: #bfd7af !important;
+  font-size: 9px !important;
+  letter-spacing: .17em;
+  line-height: 1.7;
+}
+.garden-home #faq .faq-spark {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  place-items: center;
+  border: 1px solid rgba(193, 221, 180, .32);
+  border-radius: 50%;
+  color: #c7dfb8;
+  font-size: 17px;
+}
+.garden-home #faq .faq-intro-card h2 {
+  margin: 34px 0 17px !important;
+  color: #f8f7ec !important;
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: clamp(34px, 4vw, 53px) !important;
+  font-weight: 450 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.045em;
+}
+.garden-home #faq .faq-intro-card h2 em {
+  color: #c4ddb5 !important;
+  font-style: italic;
+  font-weight: 400;
+}
+.garden-home #faq .faq-intro-card > p {
+  max-width: 380px;
+  margin: 0 0 21px !important;
+  color: #d0ddd0 !important;
+  font-size: 13px !important;
+  line-height: 1.9 !important;
+}
+.garden-home #faq .faq-assistant-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 28px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid rgba(197, 222, 185, .5);
+  color: #f3f5e9 !important;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .055em;
+  text-decoration: none;
+}
+.garden-home #faq .faq-assistant-link span {
+  color: #c5dfb6;
+  transition: transform .22s ease;
+}
+.garden-home #faq .faq-assistant-link:hover span {
+  transform: translate(3px, -2px);
+}
+.garden-home #faq .faq-intro-image {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 190px;
+  flex: 1 1 auto;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #193c2e;
+}
+.garden-home #faq .faq-intro-image::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 25% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(4, 22, 17, .86));
+  pointer-events: none;
+}
+.garden-home #faq .faq-intro-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  object-fit: cover;
+  object-position: center 46%;
+  filter: saturate(.82);
+  transition: transform .7s ease;
+}
+.garden-home #faq .faq-intro-card:hover .faq-intro-image img {
+  transform: scale(1.045);
+}
+.garden-home #faq .faq-image-caption {
+  position: absolute;
+  z-index: 1;
+  right: 17px;
+  bottom: 15px;
+  left: 17px;
+}
+.garden-home #faq .faq-image-caption span {
+  color: #d0e4c5;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.garden-home #faq .faq-image-caption p {
+  margin: 6px 0 0 !important;
+  color: #fffdf4 !important;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 16px !important;
+  line-height: 1.35 !important;
+}
+.garden-home #faq .faq-content-card {
+  padding: clamp(18px, 2.5vw, 34px);
+  background: rgba(3, 22, 19, .27);
+}
+.garden-home #faq .faq-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 3px 1px 19px;
+  border-bottom: 1px solid rgba(192, 219, 184, .18);
+  color: #b9d7a9;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.garden-home #faq .faq-list-heading span:last-child {
+  color: #91a99a;
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+.garden-home #faq .faq-accordion {
+  display: grid;
+  gap: 0;
+}
+.garden-home #faq .faq-item {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(192, 219, 184, .16) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.garden-home #faq .faq-item summary {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0 !important;
+  color: #f3f4e9 !important;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px !important;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.garden-home #faq .faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.garden-home #faq .faq-item summary::after {
+  content: none !important;
+  display: none !important;
+}
+.garden-home #faq .faq-number {
+  align-self: start;
+  padding-top: 2px;
+  color: #99ba8c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.garden-home #faq .faq-question {
+  color: #f3f4e9;
+}
+.garden-home #faq .faq-chevron {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(197, 222, 185, .27);
+  border-radius: 50%;
+  color: #c7dfb8;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform .24s ease, background .24s ease, color .24s ease;
+}
+.garden-home #faq .faq-item[open] .faq-chevron {
+  transform: rotate(45deg);
+  color: #09241d;
+  background: #c7dfb8;
+}
+.garden-home #faq .faq-answer {
+  padding: 0 45px 20px 42px;
+  animation: faq-answer-in .24s ease both;
+}
+.garden-home #faq .faq-answer p {
+  max-width: 600px;
+  margin: 0 !important;
+  color: #c1d0c5 !important;
+  font-size: 12px !important;
+  line-height: 1.9 !important;
+}
+.garden-home #faq .faq-bottom-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 22px;
+  color: #aabdb0;
+  font-size: 10px;
+  line-height: 1.7;
+}
+.garden-home #faq .faq-bottom-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: #bdd8ad;
+  box-shadow: 0 0 0 4px rgba(189, 216, 173, .1);
+}
+@keyframes faq-answer-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Login and registration: use a real local botanical asset behind low-opacity glass cards. */
+body.auth-page {
+  position: relative;
+  isolation: isolate;
+  background-color: #061b18 !important;
+  background-image:
+    linear-gradient(115deg, rgba(3, 19, 17, .79), rgba(5, 28, 23, .48) 50%, rgba(3, 18, 16, .74)),
+    url("../img/hero.jpg") !important;
+  background-size: cover !important;
+  background-position: center 48% !important;
+  background-attachment: fixed !important;
+}
+body.auth-page .auth-visual {
+  background: linear-gradient(155deg, rgba(9, 40, 32, .47), rgba(4, 23, 20, .31)) !important;
+  border-right: 1px solid rgba(214, 235, 202, .17) !important;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+body.auth-page .auth-panel {
+  background: rgba(4, 23, 20, .19) !important;
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+}
+body.auth-page .auth-card {
+  background: rgba(5, 28, 24, .53) !important;
+  border: 1px solid rgba(216, 237, 203, .28) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .22) !important;
+  backdrop-filter: blur(20px) saturate(115%);
+  -webkit-backdrop-filter: blur(20px) saturate(115%);
+}
+body.auth-page .auth-card h2 {
+  color: #fbf8ee !important;
+}
+body.auth-page .auth-subtitle,
+body.auth-page .auth-back,
+body.auth-page .auth-switch {
+  color: #d0ded2 !important;
+}
+body.auth-page .auth-form label {
+  color: #ecf2e8 !important;
+}
+body.auth-page .auth-form input {
+  color: #f7f6ee !important;
+  border-color: rgba(218, 237, 205, .24) !important;
+  background: rgba(4, 23, 20, .42) !important;
+}
+body.auth-page .auth-form input::placeholder {
+  color: #a8bbae !important;
+}
+body.auth-page .auth-form input:focus {
+  border-color: rgba(196, 222, 181, .8) !important;
+  box-shadow: 0 0 0 3px rgba(196, 222, 181, .12) !important;
+}
+body.auth-page .auth-brand,
+body.auth-page .auth-visual-copy h1 {
+  color: #fbf8ee !important;
+}
+body.auth-page .auth-brand svg {
+  stroke: #d0e4c4 !important;
+}
+body.auth-page .auth-visual-copy h1 em,
+body.auth-page .auth-visual-copy .eyebrow {
+  color: #d0e4c4 !important;
+}
+body.auth-page .auth-visual-copy p,
+body.auth-page .auth-visual-foot {
+  color: #e0e8dc !important;
+}
+@media (max-width: 900px) {
+  .garden-home #faq .faq-layout {
+    grid-template-columns: 1fr;
+  }
+  .garden-home #faq .faq-intro-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, .65fr);
+    column-gap: 22px;
+  }
+  .garden-home #faq .faq-intro-top,
+  .garden-home #faq .faq-intro-card h2,
+  .garden-home #faq .faq-intro-card > p,
+  .garden-home #faq .faq-assistant-link {
+    grid-column: 1;
+  }
+  .garden-home #faq .faq-intro-image {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    min-height: 240px;
+  }
+}
+@media (max-width: 620px) {
+  .garden-home #faq.faq-refresh {
+    border-radius: 22px !important;
+    padding: 10px !important;
+  }
+  .garden-home #faq .faq-intro-card,
+  .garden-home #faq .faq-content-card {
+    border-radius: 17px;
+    padding: 20px 17px;
+  }
+  .garden-home #faq .faq-intro-card {
+    display: flex;
+  }
+  .garden-home #faq .faq-intro-card h2 {
+    margin-top: 24px !important;
+    font-size: clamp(34px, 10vw, 46px) !important;
+  }
+  .garden-home #faq .faq-intro-image {
+    min-height: 170px;
+    height: 170px;
+  }
+  .garden-home #faq .faq-item summary {
+    grid-template-columns: 23px minmax(0, 1fr) 30px;
+    gap: 9px;
+    padding: 17px 0 !important;
+    font-size: 12px !important;
+  }
+  .garden-home #faq .faq-answer {
+    padding: 0 8px 18px 32px;
+  }
+  .garden-home #faq .faq-bottom-note {
+    align-items: flex-start;
+  }
+  body.auth-page {
+    background-attachment: scroll !important;
+    background-position: center center !important;
+  }
+  body.auth-page .auth-panel {
+    background: rgba(4, 23, 20, .34) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  body.auth-page .auth-card {
+    background: rgba(5, 28, 24, .59) !important;
+    padding: clamp(20px, 5vw, 28px) !important;
+  }
+}

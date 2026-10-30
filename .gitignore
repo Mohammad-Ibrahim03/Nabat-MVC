@@ -1,0 +1,14 @@
+# Local secrets and machine-specific settings
+.env
+.env.*
+!.env.example
+
+# Runtime files
+*.log
+*.cache
+.DS_Store
+Thumbs.db
+
+# Local editor settings
+.vscode/
+.idea/

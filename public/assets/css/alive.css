@@ -1,0 +1,381 @@
+/* NABTA — "Alive" layer. Loaded last. Pure CSS, no JavaScript.
+   One rhythm drives everything: a slow breath (--breath). */
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/fraunces.woff2") format("woff2");
+}
+
+:root {
+  --breath: 5.5s;
+  --leaf-shadow: 0 12px 18px color-mix(in srgb, var(--deep) 38.0%, transparent);
+}
+
+/* ---------- Softer, more organic headlines ---------- */
+body.botanical-edition:not(.admin-body) :is(h1, h2) {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 380;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1,
+    "opsz" 96;
+  letter-spacing: -0.015em;
+}
+.garden-home .hero h1,
+.garden-home .hero-heading {
+  font-weight: 320;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  font-size: clamp(46px, 6.2vw, 96px);
+  text-shadow: 0 2px 30px color-mix(in srgb, var(--deep) 35.0%, transparent);
+}
+.garden-home .hero h1 em,
+.garden-home .hero-heading em {
+  font-style: normal;
+  color: var(--mint);
+}
+
+/* Calmer chrome: drop the small capital labels over the hero */
+.garden-home .hero-tag,
+.garden-home .hero-bottom,
+.garden-home .hero-caption p,
+.garden-home .hero-copy .eyebrow:not(.eyebrow-offer) {
+  display: none;
+}
+.garden-home .hero-copy .eyebrow-offer {
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--wood);
+  background: var(--mint);
+  padding: 7px 16px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+.garden-home .hero-caption {
+  border-top: 0;
+  padding-top: 0;
+}
+.garden-home .hero p {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 430px;
+  color: var(--mint);
+}
+
+/* ---------- The photo breathes and drifts ---------- */
+.garden-home .hero-media > img {
+  transform-origin: 62% 62%;
+  filter: saturate(1.1) brightness(1.05);
+  animation: drift 26s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from {
+    scale: 1.02;
+    translate: 0 0;
+  }
+  to {
+    scale: 1.085;
+    translate: -1.4% -0.8%;
+  }
+}
+/* lighter, warmer veil so the garden feels sunlit, not shaded */
+.garden-home .hero-media:after {
+  background:
+    linear-gradient(
+      96deg,
+      color-mix(in srgb, var(--forest) 66.0%, transparent) 0%,
+      color-mix(in srgb, var(--wood) 30.0%, transparent) 40%,
+      color-mix(in srgb, var(--wood) 0.0%, transparent) 70%
+    ),
+    linear-gradient(0deg, color-mix(in srgb, var(--forest) 50.0%, transparent), transparent 38%) !important;
+}
+
+/* ---------- Living layer (sits between the photo and the text) ---------- */
+.alive {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.alive-glow {
+  position: absolute;
+  right: -12%;
+  top: -30%;
+  width: 72vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--sage) 62%, transparent) 0,
+    color-mix(in srgb, var(--sage) 20%, transparent) 38%,
+    transparent 66%
+  );
+  mix-blend-mode: screen;
+  animation: glow var(--breath) ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from {
+    scale: 0.92;
+    opacity: 0.6;
+  }
+  to {
+    scale: 1.1;
+    opacity: 1;
+  }
+}
+
+.alive-rays {
+  position: absolute;
+  top: -25%;
+  right: -8%;
+  width: 80vw;
+  height: 150%;
+  transform-origin: 85% 0;
+  background: repeating-linear-gradient(
+    104deg,
+    transparent 0 6%,
+    color-mix(in srgb, var(--sage) 17%, transparent) 8.5%,
+    transparent 11% 17%
+  );
+  -webkit-mask: radial-gradient(
+    ellipse 70% 60% at 85% 0,
+    var(--deep) 0,
+    transparent 72%
+  );
+  mask: radial-gradient(ellipse 70% 60% at 85% 0, var(--deep) 0, transparent 72%);
+  mix-blend-mode: screen;
+  animation: rays 13s ease-in-out infinite alternate;
+}
+@keyframes rays {
+  from {
+    rotate: -5deg;
+    opacity: 0.5;
+  }
+  to {
+    rotate: 4deg;
+    opacity: 1;
+  }
+}
+
+/* Foliage framing the corners */
+.fol {
+  position: absolute;
+  overflow: visible;
+  filter: drop-shadow(var(--leaf-shadow));
+}
+.fol-a {
+  top: -14px;
+  left: -34px;
+  width: min(46vw, 660px);
+}
+.fol-b {
+  top: -14px;
+  right: -34px;
+  width: min(34vw, 500px);
+  transform: scaleX(-1);
+}
+.fol .br {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  animation: sway var(--t, 9s) ease-in-out infinite alternate;
+  animation-delay: var(--d, 0s);
+}
+.fol .fl {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  animation: flutter var(--t, 5s) ease-in-out infinite alternate;
+  animation-delay: var(--d, 0s);
+}
+@keyframes sway {
+  from {
+    rotate: -2.4deg;
+  }
+  to {
+    rotate: 2.8deg;
+  }
+}
+@keyframes flutter {
+  from {
+    rotate: -5deg;
+  }
+  to {
+    rotate: 6deg;
+  }
+}
+
+/* Pollen, dust and the odd drifting leaf */
+.p {
+  position: absolute;
+  left: var(--x);
+  bottom: -4vh;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--mint) 95.0%, transparent),
+    color-mix(in srgb, var(--mint) 0.0%, transparent) 70%
+  );
+  animation:
+    rise var(--t) linear infinite,
+    wobble calc(var(--t) / 3.2) ease-in-out infinite alternate;
+  animation-delay: var(--d), var(--d);
+}
+.p.lf {
+  width: calc(var(--s) * 1.7);
+  height: var(--s);
+  border-radius: 0 100% 0 100%;
+  background: linear-gradient(135deg, var(--sage), var(--leaf));
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--deep) 30.0%, transparent);
+}
+@keyframes rise {
+  0% {
+    translate: 0 0;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.95;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    translate: var(--dx) -108vh;
+    opacity: 0;
+  }
+}
+@keyframes wobble {
+  from {
+    transform: translateX(-18px) rotate(-20deg);
+  }
+  to {
+    transform: translateX(18px) rotate(25deg);
+  }
+}
+
+/* ---------- One orchestrated moment: the headline unfurls ---------- */
+.garden-home .hero h1 .w,
+.garden-home .hero-heading .w {
+  display: inline-block;
+}
+.promo-slider:has(#promo-0:checked) .slide-0 .w,
+.promo-slider:has(#promo-1:checked) .slide-1 .w,
+.promo-slider:has(#promo-2:checked) .slide-2 .w {
+  animation: unfurl 1.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(0.25s + var(--i) * 0.13s);
+}
+@keyframes unfurl {
+  from {
+    opacity: 0;
+    transform: translateY(0.55em) rotate(2.5deg);
+    filter: blur(9px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+.promo-slider:has(#promo-0:checked)
+  .slide-0
+  .hero-copy
+  > :is(p, .cta-row, .eyebrow-offer),
+.promo-slider:has(#promo-1:checked)
+  .slide-1
+  .hero-copy
+  > :is(p, .cta-row, .eyebrow-offer),
+.promo-slider:has(#promo-2:checked)
+  .slide-2
+  .hero-copy
+  > :is(p, .cta-row, .eyebrow-offer) {
+  animation: settle 1.4s ease-out 1.1s both;
+}
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Button that quietly breathes */
+.garden-home .hero .btn {
+  border-radius: 999px;
+  padding-inline: 26px;
+  position: relative;
+  background: var(--mint);
+  border-color: var(--mint);
+}
+.garden-home .hero .btn::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: inherit;
+  border: 1px solid color-mix(in srgb, var(--mint) 70.0%, transparent);
+  animation: halo var(--breath) ease-in-out infinite;
+}
+@keyframes halo {
+  0%,
+  100% {
+    scale: 0.95;
+    opacity: 0;
+  }
+  50% {
+    scale: 1.06;
+    opacity: 0.8;
+  }
+}
+
+/* Slide controls: soft, rounded */
+.garden-home .slider-controls label {
+  border-top-width: 3px;
+  border-radius: 99px;
+}
+
+
+
+/* ---------- Small screens ---------- */
+@media (max-width: 760px) {
+  .fol-a {
+    width: 78vw;
+  }
+  .fol-b {
+    width: 56vw;
+  }
+  .p:nth-child(n + 9) {
+    display: none;
+  }
+  .garden-home .hero p {
+    font-size: 14px;
+  }
+  .garden-home {
+    height: 40px;
+  }
+}
+
+/* ---------- Respect reduced motion: keep it beautiful, but still ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .alive *,
+  .garden-home .hero-media > img,
+  .garden-home .hero .btn::after,
+  .garden-home,
+  .w,
+  .garden-home .hero-copy > * {
+    animation: none !important;
+  }
+  .p {
+    display: none;
+  }
+}

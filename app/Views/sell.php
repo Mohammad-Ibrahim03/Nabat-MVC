@@ -1,0 +1,3 @@
+<?php require __DIR__ . '/layouts/site-header.php'; ?>
+<main class="store-page"><section class="store-page-hero"><p class="store-eyebrow">GROW WITH US</p><h1>For the people who <em>grow.</em></h1><p>Seller profiles and product listings are planned for the next marketplace release.</p></section><section class="store-content"><div class="store-empty"><span>✳</span><h2>Seller tools are coming next.</h2><p>The current release supports customer accounts, the catalogue, basket, checkout and order history. We’re keeping seller listings out until the database supports seller ownership and moderation.</p><a class="store-button" href="index.php?route=products">Explore the store</a></div></section></main>
+<?php require __DIR__ . '/layouts/site-footer.php'; ?>

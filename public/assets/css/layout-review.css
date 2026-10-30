@@ -1,0 +1,43 @@
+/* Layout resilience, keyboard access and readable small-screen controls. */
+img{max-width:100%}
+.container>* , .panel, .account-layout>*, .content-split>*, .shop-layout>*, .assistant-layout>*, .admin-panels>*, .form-grid>*, .footer-grid>*{min-width:0}
+h1,h2,h3,p,a,td,th{overflow-wrap:break-word}
+input,select,textarea{max-width:100%;min-width:0}
+textarea{resize:vertical}
+.page-heading,.admin-title,.shop-toolbar,.toolbar,.cta-row,.footer-bottom{flex-wrap:wrap}
+.screen:not(.promo-slider){height:auto;min-height:calc(100svh - var(--head));padding-block:clamp(32px,5vh,64px)}
+.auth-layout{height:auto;min-height:calc(100svh - 124px)}
+.auth-visual{min-height:560px}
+.admin-sidebar{overflow-y:auto}
+.panel:hover,.stat:hover{transform:none}
+.panel,.stat,.page-heading,.admin-title{animation:none!important}
+:focus-visible{outline:3px solid var(--leaf);outline-offset:4px}
+.garden-home .header :focus-visible,.footer :focus-visible,.account-nav :focus-visible,.admin-sidebar :focus-visible{outline-color:var(--mint)}
+.mobile-nav nav{max-height:calc(100dvh - var(--head));overflow-y:auto;z-index:100}
+.garden-home .header .mobile-nav nav{background:var(--leaf)}
+.garden-home .header .mobile-nav nav a{color:var(--mint)}
+.popover{max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overscroll-behavior:contain}
+.popover-top{gap:16px;align-items:start}
+.popover-top h2{min-width:0}
+.popover .icon-btn{flex-shrink:0}
+.garden-home .hero-caption{max-width:38%}
+.table-scroll{max-width:100%;overscroll-behavior-inline:contain}
+@media(max-width:1000px){.main-nav{display:none}.mobile-nav{display:block}.mobile-nav nav{position:absolute;top:var(--head);left:0;right:0;background:var(--leaf);padding:20px;display:grid;gap:16px}.header .mobile-nav nav a{color:var(--mint)}.mobile-nav summary{cursor:pointer;list-style:none;padding:10px}}
+@media(max-width:760px){
+ .field input,.field select,.field textarea,input.control,select.control{font-size:16px}
+ .popover .form-grid{grid-template-columns:1fr}
+ .garden-home .hero-caption{display:none}
+ .garden-home .slider-controls{bottom:30px}
+ .garden-home .hero-copy{padding-bottom:110px}
+ .garden-home .collection .product-visual{max-height:none}
+ .shop-toolbar select,.toolbar input,.toolbar select{width:100%;max-width:100%}
+ .benefit{grid-template-columns:24px minmax(0,1fr)}
+ .benefit p{grid-column:2}
+ .btn,.icon-btn,.mobile-nav summary{min-height:44px}
+ .icon-btn{min-width:44px}
+ .path-card{height:auto;min-height:190px}
+ .page-heading .btn,.admin-title .btn{max-width:100%;var(--mint)-space:normal}
+}
+@media(max-width:380px){.header-actions{gap:6px}.logo-sub{display:none}.paths-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.bag-item{grid-template-columns:55px minmax(0,1fr)}.bag-item>:last-child{grid-column:2}}
+@media(max-height:700px) and (min-width:761px){.garden-home .promo-slider{min-height:700px}.garden-home .hero h1,.garden-home .hero-heading{font-size:clamp(48px,5vw,70px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

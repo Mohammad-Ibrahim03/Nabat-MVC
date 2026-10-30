@@ -1,0 +1,13 @@
+# The application uses index.php?route=... URLs and does not require mod_rewrite.
+# Keep the local environment file private on Apache 2.4 and legacy Apache 2.2.
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\\.env(?:\\..*)?$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^\\.env(?:\\..*)?$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
